@@ -19,7 +19,9 @@ class ListAllUsersUseCase {
       throw new Error("Mensagem do erro");
     }
 
-    return this.usersRepository.list();
+    const listUsers = this.usersRepository.list();
+
+    return listUsers;
   }
 }
 

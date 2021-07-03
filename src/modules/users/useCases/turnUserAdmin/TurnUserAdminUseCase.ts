@@ -15,13 +15,7 @@ class TurnUserAdminUseCase {
       throw new Error("User does not exist!");
     }
 
-    const userAdmin = {
-      ...user,
-      admin: true,
-      updated_at: new Date(),
-    };
-
-    const updatedUser = this.usersRepository.turnAdmin(userAdmin);
+    const updatedUser = this.usersRepository.turnAdmin(user);
 
     return updatedUser;
   }
