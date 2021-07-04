@@ -1,0 +1,219 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Users",
+        "description": "Essa é uma documentação para o desafio 05 do ignite",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create a user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Herbert",
+                                    "email": "herbert@herbert.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "User already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Users"],
+                "summary": "Retorna todos os usuários",
+                "description": "Somente o usuário admin pode acessar",
+                "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação realizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "id": {
+                                                "type": "string",
+                                                "example":"004aadf4-8e1a-4450-905b-6039179f52da"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Herbert"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "Herbert@herbet.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "2021-03-10T23:13:14.1272"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "example": "2021-03-10T23:17:14.1272"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not have permission or User does not exist!"
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Retorna um usuário especifico",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example":"004aadf4-8e1a-4450-905b-6039179f52da"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Herbert"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "Herbert@herbet.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-03-10T23:13:14.1272"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-03-10T23:17:14.1272"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist!"
+                    }
+                }
+            }
+        },
+        "/{user_id}/admin": {
+            "patch": {
+                "tags": ["Users"],
+                "summary": "Torna um usuário admin",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example":"004aadf4-8e1a-4450-905b-6039179f52da"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Herbert"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "Herbert@herbet.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-03-10T23:13:14.1272"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-03-10T23:17:14.1272"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist!"
+                    }
+                }
+            }
+        }
+    }
+}
